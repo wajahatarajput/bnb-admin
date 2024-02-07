@@ -22,8 +22,8 @@ const Login = (props) => {
     };
 
     return (
-        <div className="container">
-            <div className="row justify-content-center align-items-center min-vh-100">
+        <div className="container h-100">
+            <div className="row justify-content-center align-items-center h-100">
                 <div className="col-lg-6 d-none d-lg-block">
                     <img src={logo} alt="Logo" className="logo img-fluid" />
                 </div>

@@ -1,9 +1,11 @@
-import { Login } from "./components";
+import { Dashboard, Login } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <Login type={'Admin'} />
+      <Dashboard>
+        <Login type={'Admin'} />
+      </Dashboard>
     </div>
   );
 }
