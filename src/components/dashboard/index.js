@@ -1,9 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTachometerAlt, faHome, faCog } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
 
-function Dashboard({ children }) {
+function Dashboard(props) {
+    const { children } = props;
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    console.log(isDropdownOpen)
 
     const handleAvatarClick = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -15,55 +20,28 @@ function Dashboard({ children }) {
 
     return (
         <div className="container-fluid vh-100 d-flex flex-column p-0">
-            {/* Topbar */}
-            <div className="bg-purple" style={{ height: '10%' }}>
-                <div className="container-fluid d-flex justify-content-between align-items-center py-2">
-                    <div>
-                        {/* Logged in user avatar */}
-                        <img
-                            src="https://via.placeholder.com/50"
-                            alt="Avatar"
-                            className="rounded-circle me-2"
-                            onClick={handleAvatarClick}
-                            style={{ cursor: 'pointer' }}
-                        />
-                        {/* Dropdown menu */}
-                        {isDropdownOpen && (
-                            <div className="dropdown" style={{ position: 'absolute', right: '1rem' }}>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a className="dropdown-item" onClick={handleLogout} href="#">
-                                            Logout
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
 
             {/* Sidebar and Main Panel */}
             <div className="d-flex flex-grow-1">
                 {/* Sidebar */}
                 <div
-                    className="bg-purple text-light d-md-flex d-none"
-                    style={{ width: '20%' }}
+                    className="bg-purple text-light d-flex flex-column px-3 justify-content-center align-items-center"
+                    style={{ width: '5%' }}
                 >
                     <ul className="nav flex-column">
                         <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                <FontAwesomeIcon icon={faHome} />
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link active" href="#">
-                                Dashboard
+                                <FontAwesomeIcon icon={faTachometerAlt} />
                             </a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Settings
+                                <FontAwesomeIcon icon={faCog} />
                             </a>
                         </li>
                     </ul>
@@ -71,16 +49,43 @@ function Dashboard({ children }) {
 
                 {/* Main Panel */}
                 <div className="flex-grow-1 justify-content-center align-items-center">
+                    {/* Topbar */}
+                    <div className="bg-purple" style={{ height: '5%' }}>
+                        <div className="container-fluid d-flex justify-content-end align-items-center py-2">
+                            <div>
+                                {/* Logged in user avatar */}
+                                <img
+                                    src="https://via.placeholder.com/30"
+                                    alt="Avatar"
+                                    className="rounded-circle me-5"
+                                    onClick={handleAvatarClick}
+                                    style={{ cursor: 'pointer' }}
+                                />
+                                {/* Dropdown menu */}
+                                {isDropdownOpen && (
+                                    <div className='mt-2' style={{ cursor: 'pointer', zIndex: -1000 }} onClick={handleLogout}>
+                                        <span className='py-3 px-2 bg-light text-dark text-center rounded' style={{ listStyle: 'none' }}>
+                                            Logout
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                     {/* Your content goes here */}
-                    {children}
+                    <main className='d-flex justify-content-center align-items-center' style={{ height: '90%' }}>
+                        {children}
+                    </main>
+                    {/* Footer */}
+                    <div className="bg-purple container-fluid text-center" style={{ height: '5%' }}>
+                        {/* Footer content goes here */}
+                        &copy; 2024 - Begum Nusrat Bhutto University - All rights reserved.
+                    </div>
                 </div>
+
             </div>
 
-            {/* Footer */}
-            <div className="bg-purple" style={{ height: '10%' }}>
-                {/* Footer content goes here */}
-                Footer
-            </div>
+
         </div>
     );
 }
