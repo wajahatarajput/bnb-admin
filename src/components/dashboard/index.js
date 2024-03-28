@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTachometerAlt, faHome, faCog } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
 import { useAuth } from '../../providers';
+import { Link } from 'react-router-dom';
 
 function Dashboard(props) {
     const { children } = props;
@@ -31,19 +32,19 @@ function Dashboard(props) {
                 >
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to={'/dashboard'} className="nav-link">
                                 <FontAwesomeIcon icon={faHome} />
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="#">
+                            <Link to={'/createcourse'} className="nav-link active">
                                 <FontAwesomeIcon icon={faTachometerAlt} />
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to={''} className="nav-link">
                                 <FontAwesomeIcon icon={faCog} />
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

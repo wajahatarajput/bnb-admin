@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/bnb.svg'
 import { useAuth } from '../../providers';
-import { ToastsContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 const Login = (props) => {
