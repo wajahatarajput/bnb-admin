@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import logo from '../../assets/bnb.svg'
-import { useAuth } from '../../providers';
-import { ToastsContainer } from 'react-toastify';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-const Login = (props) => {
+export const SignUp = (props) => {
     const { type } = props;
-    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ username: '', password: '' });
 
@@ -19,13 +18,18 @@ const Login = (props) => {
         setShowPassword((prevShow) => !prevShow);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add your login logic here
-        login({
+        await axios.post('http://localhost:3000/api/users', {
             username: e.target[0].value,
             password: e.target[1].value,
-        })
+            role: 'admin'
+        }).then((res) => {
+            console.log(res.data)
+            if (res.data) {
+                toast.success('User  created successfully!');
+            }
+        });
     };
 
     return (
@@ -36,7 +40,7 @@ const Login = (props) => {
                         <img src={logo} alt="Logo" className="logo img-fluid" />
                     </div>
                     <div className="col-lg-6 col-md-8 col-sm-10">
-                        <h2 className="mb-4">{type} Login</h2>
+                        <h2 className="mb-4">{type} Register </h2>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="username" className="form-label">
@@ -78,16 +82,14 @@ const Login = (props) => {
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary w-100">
-                                Login
+                                Register
                             </button>
                         </form>
-                        <Link className='btn btn-outline-info text-dark mt-3' to={'/signup'}> Sign Up </Link>
+                        <Link className='btn btn-outline-info text-dark mt-3' to={'/'}> Login </Link>
                     </div>
                 </div>
             </div>
-            {/* <ToastsContainer /> */}
+            <ToastContainer />
         </div>
     );
 };
-
-export default Login;

@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTachometerAlt, faHome, faCog } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
+import { useAuth } from '../../providers';
 
 function Dashboard(props) {
     const { children } = props;
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    console.log(isDropdownOpen)
+    const { logout } = useAuth();
 
     const handleAvatarClick = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -16,6 +16,7 @@ function Dashboard(props) {
 
     const handleLogout = () => {
         // Your logout logic here
+        logout()
     };
 
     return (
